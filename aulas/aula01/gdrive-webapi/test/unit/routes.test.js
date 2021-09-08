@@ -95,4 +95,10 @@ describe('#Routes suit test', () => {
         });
 
     });
+
+    describe('#get', () => {
+        test.skip('given method GET it should list all files downloaded', async () => {
+            
+        });
+    });
 });
