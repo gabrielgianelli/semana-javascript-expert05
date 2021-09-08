@@ -1,6 +1,6 @@
 import pino from 'pino';
 const logger = pino({
-    preetyPrint: {
+    prettyPrint: {
         ignore: 'pid,hostname'
     }
 });
