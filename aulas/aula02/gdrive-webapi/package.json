@@ -1,0 +1,26 @@
+{
+  "name": "gdrive-webapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "_comment_start": "mkdir -p downloads && node src/index.js",
+    "start": "node src/index.js",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand",
+    "test:watch": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --watch --runInBand",
+    "test:cov": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --no-cache --runInBand --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.1.0"
+  },
+  "dependencies": {
+    "pino": "^6.8.0",
+    "pino-pretty": "^5.1.3",
+    "pretty-bytes": "5.6",
+    "socket.io": "^4.1.3"
+  }
+}
