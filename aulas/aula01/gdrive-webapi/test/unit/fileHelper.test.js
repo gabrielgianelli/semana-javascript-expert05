@@ -4,7 +4,7 @@ import FileHelper from '../../src/fileHelper';
 
 describe('#FileHelper', () => {
 
-    describe('#getFileStatus', () => {
+    describe('#getFilesStatus', () => {
         test('it should return files statuses in correct format', async () => {
             
             const statMock = {
