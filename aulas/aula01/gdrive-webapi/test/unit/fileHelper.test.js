@@ -41,14 +41,14 @@ describe('#FileHelper', () => {
             const result = await FileHelper.getFilesStatus('/tmp');
             const expectedResult = [
                 {
-                    size: '11 kb',
-                    birthtime: statMock.birthtime,
+                    size: '117 kB',
+                    lastModified: statMock.birthtime,
                     owner: mockUser,
                     file: filename
                 }
             ];
 
-            expect(fs.promises.stat).toHaveBeenCalledWith(`/tmp;${filename}`);
+            expect(fs.promises.stat).toHaveBeenCalledWith(`/tmp/${filename}`);
             expect(result).toMatchObject(expectedResult);
         });
     });
