@@ -8,10 +8,10 @@ import { pipeline } from "stream/promises";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const defaultDownloadsFolder = resolve(__dirname, '../', 'downloads');
 export default class Routes {
-    io;
     constructor(downloadsFolder = defaultDownloadsFolder) {
         this.downloadsFolder = downloadsFolder;
         this.FileHelper = FileHelper;
+        this.io = {};
     }
 
     setSocketInstance(io) {
