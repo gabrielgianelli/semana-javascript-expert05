@@ -92,6 +92,9 @@ describe('#UploadHandler test suite', () => {
                 socketId: '01'
             });
 
+            jest.spyOn(handler, handler.canExecute.name)
+                .mockReturnValueOnce(true);
+
             const messages = ['hello'];
             const source = TestUtil.generateReadableStream(messages);
             const onWrite = jest.fn();
@@ -114,4 +117,45 @@ describe('#UploadHandler test suite', () => {
         });
     });
 
+    describe('#canExecute', () => {
+
+        
+        test('should return true when time is later than specified delay', () => {
+            const timerDelay = 1000;
+            const uploadHandler = new UploadHandler({
+                io: {},
+                socketId: '',
+                messageTimeDelay: timerDelay
+            });
+
+
+            const tickNow = TestUtil.getTimeFromDate('2021-07-01 00:00:03');
+            TestUtil.mockDateNow([tickNow]);
+
+            const lastExecution = TestUtil.getTimeFromDate('2021-07-01 00:00:00');
+            
+            const result = uploadHandler.canExecute(lastExecution);
+
+            expect(result).toBeTruthy();
+        });
+
+        test('should return false when time isnt later than specified delay', () => {
+            const timerDelay = 3000;
+            const uploadHandler = new UploadHandler({
+                io: {},
+                socketId: '',
+                messageTimeDelay: timerDelay
+            });
+
+
+            const now = TestUtil.getTimeFromDate('2021-07-01 00:00:02');
+            TestUtil.mockDateNow([now]);
+
+            const lastExecution = TestUtil.getTimeFromDate('2021-07-01 00:00:01');
+            
+            const result = uploadHandler.canExecute(lastExecution);
+
+            expect(result).toBeFalsy();         
+        });
+    });
 });
