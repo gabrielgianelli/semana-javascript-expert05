@@ -1,7 +1,8 @@
 export default class AppController {
-    constructor({ connectionManager, viewManager }) {
+    constructor({ connectionManager, viewManager, dragAndDropManager }) {
         this.connectionManager = connectionManager;
         this.viewManager = viewManager;
+        this.dragAndDropManager = dragAndDropManager;
 
         this.uploadingFiles = new Map();
     }
@@ -10,6 +11,11 @@ export default class AppController {
         this.viewManager.configureFileBtnClick();
         this.viewManager.configureModal();
         this.viewManager.configureOnFileChange(this.onFileChange.bind(this));
+        
+        this.dragAndDropManager.initialize({
+            onDropHandler: this.onFileChange.bind(this)
+        });
+        
         this.connectionManager.configureEvents({
             onProgress: this.onProgress.bind(this)
         });
@@ -41,6 +47,12 @@ export default class AppController {
     }
 
     async onFileChange(files) {
+        // aqui tem um bug conhecido: se no meio do upload
+        // for feito outro upload, o modal será fechado e iniciará do zero
+        this.uploadingFiles.clear();
+        console.log('AQUI');
+
+
         this.viewManager.openModal();
         this.viewManager.updateStatus(0);
 
