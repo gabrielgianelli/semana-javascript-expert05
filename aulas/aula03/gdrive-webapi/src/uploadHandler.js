@@ -9,7 +9,7 @@ export default class UploadHandler {
         this.io = io;
         this.socketId = socketId;
         this.downloadsFolder = downloadsFolder;
-        this.ON_UPLOAD_EVENT = 'file-ipload';
+        this.ON_UPLOAD_EVENT = 'file-upload';
         this.messageTimeDelay = messageTimeDelay;
     }
 
